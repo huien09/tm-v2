@@ -1,5 +1,4 @@
 // Controller - Server.js
-const database = require ("./src/database.js");
 const mysql = require('mysql');
 const express = require('express');
 const session = require('express-session');
@@ -8,7 +7,7 @@ const cors = require('cors');
 var passwordValidator = require('password-validator');
 const bcrypt = require('bcrypt');
 
-
+const database = require ("./src/database.js");
 const connection = mysql.createConnection({
 	host     : database.host,
 	user     : database.user,
@@ -306,7 +305,7 @@ app.post('/createuser', async function(request, response) {
 					response.send('Password requirement not met!');
 				}
 			}
-		}) 
+		}) // end of query
 	} 
 	else {
 		response.send('Field(s) is empty!');
@@ -379,7 +378,7 @@ app.post('/createusergroup', function(request, response) {
 				query = `INSERT INTO usergroups (groupname) VALUES (?)`
 				connection.query(query,[groupname] ,function(error, results) {
 					if (error) throw error;
-					console.log("create: " + results);
+					//console.log("create: " + results);
 				})	
 				response.send(`Group ${groupname} created!`);
 			}
@@ -402,7 +401,7 @@ app.post('/addusertogroup', function(request, response) {
 				//query2 = `SELECT * FROM useraccounts WHERE username = ?`
 				connection.query(querySelectUsername,[username], function(error, results) {
 					if (error) throw error;
-					console.log("length: " + results);
+					//console.log("length: " + results);
 					//check if username exists
 					if (results.length > 0){
 						connection.query(querySelectGroupname, [groupname2] , function(error, results, fields) {
