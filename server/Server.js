@@ -31,7 +31,7 @@ function validatePassword(password){
 //var v = validatePassword('passw0rd');
 //console.log(v);
 
-const saltRounds = 10;
+const saltRounds = 10; //for hashing
 
 //query section
 querySelectUsername = 'SELECT * FROM useraccounts WHERE username = ?';
@@ -40,12 +40,6 @@ querySelectGroupname = 'SELECT * FROM usergroups WHERE groupname = ?';
 queryCheckgroup = 'SELECT * FROM usergroups WHERE groupname = ? AND username = ?';
 queryDel = `DELETE FROM usergroups WHERE groupname = ? AND username = ?`
 querySelectNot = "SELECT * FROM usergroups WHERE NOT username = '' ";
-
-function splitString(str) {
-	var string = str.split(",");
-
-	return string;
-}
 
 function checkGroup(groupname, username) {
 	return new Promise((resolve, reject) => {
@@ -59,23 +53,23 @@ function checkGroup(groupname, username) {
 	});
 }
 
-function checkGroup2(groupname, username) {
- 	let admintag;
- 	connection.query("SELECT * FROM usergroups WHERE groupname = ? AND username = ?", [groupname, username], function(error, results, fields) {
- 		if (error) throw error;
-		//console.log("r:" + results[0].groupname + "," +results[0].username)
- 		if(results.length > 0) {
- 			admintag = '1';
- 		} else {
- 			admintag = '0';
- 		}
- 		connection.query("UPDATE useraccounts SET admintag = ? WHERE username = ?", [admintag, username], function(error, results, fields) {
- 			if (error) throw error;
- 		});
- 		//console.log(results);
-		return results;
- 	});
-}
+// function checkGroup2(groupname, username) {
+//  	let admintag;
+//  	connection.query("SELECT * FROM usergroups WHERE groupname = ? AND username = ?", [groupname, username], function(error, results, fields) {
+//  		if (error) throw error;
+// 		//console.log("r:" + results[0].groupname + "," +results[0].username)
+//  		if(results.length > 0) {
+//  			admintag = '1';
+//  		} else {
+//  			admintag = '0';
+//  		}
+//  		connection.query("UPDATE useraccounts SET admintag = ? WHERE username = ?", [admintag, username], function(error, results, fields) {
+//  			if (error) throw error;
+//  		});
+//  		//console.log(results);
+// 		return results;
+//  	});
+// }
 
 //query function for change password
 async function changePassword(username, password, response) {
@@ -95,7 +89,7 @@ async function changePassword(username, password, response) {
 				 		} else {
 				 			response.send('Invalid user'); // no changes made
 				 		}
-		 			})
+		 			});
 		 		} catch (e) {
 		 			console.log(e);
 		 		}
@@ -447,15 +441,7 @@ app.post('/removeuserfrgroup', function(request, response) {
 
 app.post('/displayusergroup', function(request, response) {
 	const {groupname3} = request.body;
-
-	// if(groupname3){
-	// 	//not in use
-	// 	connection.query(querySelectGroupname, [groupname3], function(error, results, fields) {
-	// 	 	if (error) throw error;
-	// 	 	console.log(results);
-	// 	 	response.send(results);
-	// 	 });
-	// } else { 
+ 
 		//display all records
 		connection.query(querySelectNot, function(error, results, fields) {
 		  	if (error) throw error;
@@ -473,15 +459,20 @@ app.post('/showallgroups', function(request, response) {
 	});
 });
 
-// app.post('/showallusers', function(request, response) {
-// 	connection.query("SELECT username FROM useraccounts", function(error, results) {
-// 		if (error) throw error;
-// 		//console.log(results);
-// 		response.send(results);
-// 	});
-// });
+app.post('/showallusers', function(request, response) {
+	connection.query("SELECT username FROM useraccounts", function(error, results) {
+		if (error) throw error;
+		//console.log(results);
+		response.send(results);
+	});
+});
 
 require("./src/TaskController")(app);
+require("./src/APIController")(app);
+
+app.use("*", (req, res) => {
+  res.send({ code: 4004 });
+});
 
 app.listen(4000);
 console.log("Server running")
