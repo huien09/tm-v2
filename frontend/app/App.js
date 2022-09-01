@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, useParams} from 'react-router-dom'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,8 +14,15 @@ import UpdateEmail from './components/UpdateEmail'
 import UserGroup from './components/UserGroup'
 import EditUser from './components/EditUser'
 import Protected from './components/Protected'
+import ViewApp from './components/ViewApp'
+import EditTask from './components/EditTask'
 
 function App() {
+
+	function apps(){
+		let params = useParams()
+		return <div>params.id</div>
+	}
 
   	return (
 		<div className="index">
@@ -32,6 +39,8 @@ function App() {
 				<Route path="/CreateUser" element={<CreateUser />} />
 				<Route path="/EditUser" element={<EditUser />} />
 				<Route path="/UserGroup" element={<UserGroup />} />
+				<Route path="/App/:name" element={<ViewApp />} />
+				<Route path="/Task/:taskname" element={<EditTask />} />
 				{/* <Route path="/Home" element={<Protected><Home /></Protected>} /> */}
 				{/* <Route path="/HomeUser" element={<Protected><HomeUser /></Protected>} />
 				<Route path="/ChangePassword" element={<Protected><ChangePassword /></Protected>} />
