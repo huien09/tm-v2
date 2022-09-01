@@ -62,9 +62,9 @@ function EditUser() {
         }
 
     return (
-        <div>
+        <div className="container container--narrow py-md-3">
           <button onClick={() => navigate(-1)} type="submit">Back</button>
-          <h3>Reset User Password</h3>
+          <h4>Reset User Password</h4>
           <form onSubmit={handlePassword}>
           <label htmlFor="username" className="text-muted mb-1"> </label>
           <input onChange={e => setUsername(e.target.value)} type="text" name="username" placeholder="Enter username" /><br/>
@@ -75,7 +75,7 @@ function EditUser() {
           <p><strong>{notif}</strong></p><br/>
           {/* <label htmlFor="pwdnote" className="text-muted mb-1">Leave password field blank to reset to common default password</label> */}
           </form>
-          <h3>Update User Email</h3>
+          <h4>Update User Email</h4>
           <form onSubmit={handleEmail}>
           <label htmlFor="username" className="text-muted mb-1"> </label>
           <input onChange={e => setUsername(e.target.value)} type="text" name="username" placeholder="Enter Username" /><br/>
@@ -85,7 +85,7 @@ function EditUser() {
           {/* <button type="reset">Clear fields</button> */}
           <p><strong>{notif2}</strong></p><br/>
           </form>
-          <h3>Disable/Enable User</h3>
+          <h4>Disable/Enable User</h4>
           <form>
           <label htmlFor="username" className="text-muted mb-1"> </label>
           <input onChange={e => setUsername(e.target.value)} type="text" name="username" placeholder="Enter Username" /><br/>

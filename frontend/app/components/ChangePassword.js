@@ -23,9 +23,9 @@ function ChangePassword() {
 	}
 
   return (
-    <div>
+    <div className="container container--narrow py-md-3">
       <button onClick={() => navigate(-1)} type="submit">Back</button>
-      <h2>Change Password</h2>
+      <h4>Change Password</h4>
       <form onSubmit={handleSubmit}>
       <label htmlFor="username" className="text-muted mb-1">Logged in as: {username}</label><br/>
       <label htmlFor="password" className="text-muted mb-1">Enter New Password: </label>

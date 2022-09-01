@@ -23,9 +23,9 @@ function UpdateEmail() {
 }
 
   return (
-    <div>
+    <div className="container container--narrow py-md-3">
     <button onClick={() => navigate(-1)} type="submit">Back</button>
-    <h2>Update Email</h2>
+    <h4>Update Email</h4>
     <form onSubmit={handleSubmit}>
     <label htmlFor="username" className="text-muted mb-1">Logged in as: {username}</label>
     <br/>

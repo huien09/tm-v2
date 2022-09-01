@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { Button, Container, Row, Col } from "react-bootstrap"
 
 function Logout(props) {
 	const [username, setUsername] = useState("")
@@ -18,6 +19,7 @@ function Logout(props) {
         //props.setLoggedIn(true)
         localStorage.setItem("sysUsername", response.data[0])
         localStorage.setItem("userToken", response.data[1])
+        localStorage.setItem("permitGroup", response.data[2])
         let loggedIn = localStorage.getItem("userToken")
         //console.log(loggedIn)
         if(loggedIn == "1"){
@@ -36,20 +38,31 @@ function Logout(props) {
   }
 
   const styles = {
-    padding: "20px 20px 50px 20px",
+    padding: "30px 30px 30px 50px",
     backgroundColor: "paleturquoise",
-    alignItems: "center"
+    // alignItems: "center"
   }
 
   return (
     <div className="row align-items-center">
       <form onSubmit={handleSubmit} style={styles}>
-        <h3>Task Management System | Login</h3>
-        <label>Username:</label>
-        <input onChange={e => setUsername(e.target.value)} type="text" name="username" placeholder="Username" id="username" required autoComplete="off" style={{padding: "2px"}} /><br/>
-        <label>Password:</label>
-        <input onChange={e => setPassword(e.target.value)} type="password" name="password" placeholder="Password" id="password" required autoComplete="off" style={{padding: "2px"}} />
-        <button type="submit">Login</button><br/><br/>
+        <h3>Task Management System | Login</h3><br/>
+        <Row>
+          <Col>
+          <label>Username:</label>
+          {/* </Col> */}
+          {/* <Col xs={1} md={1} lg={1}> */}
+          <input onChange={e => setUsername(e.target.value)} type="text" name="username" placeholder="Username" id="username" required autoComplete="off" style={{padding: "2px"}} />
+          </Col>
+        </Row>
+        <Row>
+          {/* <Col xs={1} md={1} lg={1}> */}
+          <Col>
+          <label>Password:</label>{" "}
+          <input onChange={e => setPassword(e.target.value)} type="password" name="password" placeholder="Password" id="password" required autoComplete="off" style={{padding: "2px"}} />
+          <button type="submit">Login</button><br/>
+          </Col>
+        </Row>
         <label><strong>{notif}</strong></label>
       </form>
     </div>

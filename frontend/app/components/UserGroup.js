@@ -66,7 +66,7 @@ function UserGroup() {
 
     async function handleDisplay(e) {
       e.preventDefault()
-      setGroupname3(e.target.reset())
+      //setGroupname3(e.target.reset())
       setNotif3("")
       while (list2.length > 0) {
         list2.pop()
@@ -93,7 +93,7 @@ function UserGroup() {
       }
       try {
         const response = await Axios.post('http://localhost:4000/showallgroups')
-          console.log(response.data)
+          //console.log(response.data)
           setList2(response.data)
           setNotif3("Existing Groups:")
           //while (list2.length > 0) {
@@ -112,7 +112,7 @@ function UserGroup() {
       }
       try {
         const response = await Axios.post('http://localhost:4000/showallusers')
-          console.log(response.data)
+          //console.log(response.data)
           setList2(response.data)
           setNotif3("Existing Users:")
           //while (list2.length > 0) {
@@ -124,9 +124,9 @@ function UserGroup() {
     }
 
     return (
-        <div>
+        <div className="container container--narrow py-md-3">
           <button onClick={() => navigate(-1)} type="submit">Back</button>
-          <h3>Create User Group</h3>
+          <h4>Create User Group</h4>
           <form onSubmit={handleCreate}>
             <label htmlFor="groupname" className="text-muted mb-1"> </label>
             <input onChange={e => setGroupname(e.target.value)} type="text" name="groupname" placeholder="Enter New Group name" />
@@ -134,7 +134,7 @@ function UserGroup() {
             {/* <button type="reset">Clear</button> */}
             <p><strong>{notif}</strong></p><br/>
           </form>
-          <h3>Edit Users in Group</h3>
+          <h4>Edit Users in Group</h4>
           <form>
             {/* <label htmlFor="groupname" className="text-muted mb-1">Enter Group Name: </label> */}
             <input onChange={e => setGroupname2(e.target.value)} type="text" name="checkgroup" placeholder="Enter Group name" />

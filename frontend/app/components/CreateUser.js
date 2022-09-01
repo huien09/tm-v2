@@ -24,9 +24,9 @@ function CreateUser() {
 	}
 
   return (
-    <div>
+    <div className="container container--narrow py-md-3">
       <button onClick={() => navigate(-1)} type="submit">Back</button>
-      <h2>Create User</h2>
+      <h4>Create User</h4>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username" className="text-muted mb-1">Username: </label>
         <input onChange={e => setUsername(e.target.value)} type="text" name="username" placeholder="Username" /><br/>
