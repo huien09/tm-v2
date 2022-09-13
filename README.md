@@ -1,2 +1,9 @@
-# tm-v2
-backup for assignment 2
+### TMS
+
+#### Assignment 2
+
+Create workflow for task in Kanban
+
+#### Assignment 3
+
+Testing of endpoints through Postman
